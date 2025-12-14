@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudeep SR | Creative Engineer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <style>
+        /* --- MODERN AESTHETIC VARIABLES --- */
+        :root {
+            --bg-color: #030305;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --glass-surface: rgba(20, 20, 20, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #7928ca;
+            --accent-gradient: linear-gradient(90deg, #7928ca, #00f3ff); /* Purple to Cyan for Tech Vibe */
+            --blur-amount: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- LIVE AI BACKGROUND --- */
+        #particles-js {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: #000;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, .brand, .btn { font-family: 'Space Grotesk', sans-serif; }
+        
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--glass-border);
+            padding: 10px 30px; border-radius: 50px;
+            z-index: 1000; display: flex; gap: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        nav a {
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500; transition: 0.3s;
+        }
+        nav a:hover, nav a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        /* --- LAYOUT --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+
+        /* --- HERO SECTION --- */
+        .hero { text-align: center; position: relative; z-index: 2; }
+        
+        /* PHOTO FRAME - TECH GLOW */
+        .photo-frame {
+            width: 180px; height: 180px; margin: 0 auto 30px;
+            border-radius: 50%; padding: 4px;
+            background: var(--accent-gradient);
+            box-shadow: 0 0 30px rgba(121, 40, 202, 0.4);
+            opacity: 0; animation: fadeUp 1s ease forwards 0s;
+        }
+        .photo-inner {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: #111; overflow: hidden; border: 4px solid #000;
+        }
+        .photo-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700; line-height: 1.1;
+            background: linear-gradient(to bottom, #fff, #aaa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 20px; letter-spacing: -2px;
+            opacity: 0; animation: fadeUp 1s ease forwards 0.2s;
+        }
+        .hero p {
+            font-size: 1.2rem; color: var(--text-muted);
+            max-width: 600px; margin: 0 auto 40px;
+            opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        /* --- WORK GRID --- */
+        .section-header {
+            font-size: 2.5rem; margin-bottom: 50px;
+            display: flex; align-items: center; gap: 20px;
+            z-index: 2; position: relative;
+        }
+        .section-header::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+
+        .project-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px; z-index: 2; position: relative;
+        }
+
+        .glass-card {
+            background: var(--glass-surface);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 24px; padding: 35px;
+            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex; flex-direction: column;
+            justify-content: space-between; height: 320px;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(121, 40, 202, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #00f3ff; margin-bottom: 10px; display: block; }
+        .card-title { font-size: 1.8rem; margin-bottom: 15px; }
+        .card-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; flex-grow: 1; }
+        
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 12px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: 0.3s; cursor: pointer;
+        }
+        .btn-primary {
+            background: white; color: black;
+        }
+        .btn-primary:hover {
+            background: #00f3ff; color: black;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+        .btn-outline {
+            border: 1px solid var(--glass-border); color: white;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* --- ABOUT & CONTACT --- */
+        .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; z-index: 2; position: relative;}
+        .stat-item { margin-bottom: 30px; padding-left: 20px; border-left: 2px solid #00f3ff; }
+        .stat-num { font-size: 2rem; font-weight: 700; color: #fff; }
+        .stat-label { color: var(--text-muted); font-size: 0.9rem; }
+
+        .contact-box {
+            background: linear-gradient(180deg, rgba(20,20,20,0.5) 0%, rgba(20,20,20,0.9) 100%);
+            border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
+            border-radius: 30px; padding: 60px; text-align: center; z-index: 2; position: relative;
+        }
+        .social-row { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .about-layout { grid-template-columns: 1fr; }
+            nav { width: 90%; justify-content: center; bottom: 20px; top: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home" class="container hero">
+        <div class="photo-frame">
+            <div class="photo-inner">
+                <img src="sudeep.jpg" alt="Sudeep SR">
+            </div>
+        </div>
+        <h1>Creative<br>Technologist.</h1>
+        <p>I am <strong>Sudeep SR</strong>. AI Engineer & Vibe Coder.<br>Blending logic with artistic chaos.</p>
+        <a href="#work" class="btn btn-primary" style="padding: 15px 40px;">View Selected Work</a>
+    </section>
+
+    <section id="work" class="container">
+        <h2 class="section-header">Selected Projects</h2>
+        
+        <div class="project-grid">
+            <div class="glass-card">
+                <div>
+                    <span class="card-tag">Web Development</span>
+                    <h3 class="card-title">Sup Tools</h3>
+                    <p class="card-desc">Modern utility suite. Full-stack tech.</p>
+                </div>
+                <a href="https://lighthearted-tartufo-05b0ad.netlify.app/#home" target="_blank" class="btn btn-primary">
+                    Click Here to Visit Site ↗
+                </a>
+            </div>
+
+            <div class="glass-card">
+                <div>
+                    <span class="card-tag">Creative Direction</span>
+                    <h3 class="card-title">Sype.ix Gallery</h3>
+                    <p class="card-desc">High-fashion video edits & storytelling.</p>
+                </div>
+                <a href="https://www.instagram.com/sype.ix?igsh=MTFuNG80bG9zdXR3cA==" target="_blank" class="btn btn-primary">
+                    Click Here to View Edits ↗
+                </a>
+            </div>
+
+            <div class="glass-card">
+                <div>
+                    <span class="card-tag">Artificial Intelligence</span>
+                    <h3 class="card-title">GenAI Experiments</h3>
+                    <p class="card-desc">Vibe coding & LLM prototypes.</p>
+                </div>
+                <span class="btn btn-outline" style="cursor: default;">Coming Soon</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="about-layout">
+            <div>
+                <h2 class="section-header" style="margin-bottom: 30px;">The Profile</h2>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-muted);">
+                    I'm an 18-year-old engineering student specializing in <strong style="color: #fff;">AIML</strong>. 
+                    <br><br>
+                    My workflow is a hybrid of <strong>technical precision</strong> (Python, Web Dev) and <strong>artistic intuition</strong> (Sketching, Editing).
+                </p>
+            </div>
+            <div>
+                <div class="stat-item"><div class="stat-num">03+</div><div class="stat-label">Years of Editing</div></div>
+                <div class="stat-item"><div class="stat-num">B.Tech</div><div class="stat-label">AIML Specialization</div></div>
+                <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Vibe Coding & GenAI</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container" style="justify-content: center;">
+        <div class="contact-box">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">Let's Collaborate.</h2>
+            <div class="social-row">
+                <a href="mailto:sudeepsr52@gmail.com" class="btn btn-primary">Email Me</a>
+                <a href="https://www.linkedin.com/in/sudeep-sr-56808435a" target="_blank" class="btn btn-outline">LinkedIn</a>
+                <a href="https://www.instagram.com/sudeepsr_" target="_blank" class="btn btn-outline">Instagram</a>
+            </div>
+            <p style="margin-top: 50px; font-size: 0.8rem; color: #555;">&copy; 2025 Sudeep SR.</p>
+        </div>
+    </section>
+
+    <script>
+        // LIVE PARTICLES CONFIG (Purple & Cyan Tech Nodes)
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#ffffff", "#00f3ff", "#7928ca"] },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true, "distance": 150,
+                    "color": "#7928ca",
+                    "opacity": 0.3, "width": 1
+                },
+                "move": { "enable": true, "speed": 1.5 }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
